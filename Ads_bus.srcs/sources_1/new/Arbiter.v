@@ -298,12 +298,14 @@ module Arbiter(
                         end                  
                 end      
             else
-            //prevent latching of slave valid signals
+            //prevent latching of slave valid signals and master ready signals
             begin
                 slav1_valid=0;
                 slav2_valid=0;
                 slav3_valid=0;
-         
+                mast1_ready=0;
+                mast2_ready=0;
+                mast3_ready=0;
             end
     end
     
