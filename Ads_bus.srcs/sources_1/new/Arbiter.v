@@ -21,7 +21,7 @@
 
 
 module Arbiter(
-    input clk,
+    input clk,reset,
     
     //master1 io
     input mast1_valid, mast1_type,
@@ -69,16 +69,20 @@ module Arbiter(
     output reg[31:0] slav3_wdata,
     output reg[31:0] slav3_addr,
     input [31:0] slav3_rdata,
-    input slav3_ready
+    input slav3_ready,
+    input slav3_split
     
     );
     
     `include "aribiter_params.vh"
     
+    reg split;
+    reg [1:0] split_master_id;
+    
     always@(*)
     begin
         //handle master1
-        if (mast1_valid==1)
+        if (mast1_valid==1 & !(split | split_master_id==master1))
             begin
                 //connect slave1
                 if (mast1_addr[14:12] == slave1)
@@ -150,7 +154,7 @@ module Arbiter(
                     end                          
                        
             end
-            else if (mast2_valid==1)
+            else if (mast2_valid==1 & !(split | split_master_id==master2))
                 begin
                 //connect slave1
                 if (mast2_addr[14:12] == slave1)
@@ -221,7 +225,7 @@ module Arbiter(
                         mast2_ready = 0;
                     end   
                 end
-            else if (mast3_valid==1)
+            else if (mast3_valid==1 & !(split | split_master_id==master3))
                     begin
                     //connect slave1
                     if (mast3_addr[14:12] == slave1)
@@ -293,10 +297,31 @@ module Arbiter(
                         end                  
                 end      
             else
+            //prevent latching of slave valid signals
             begin
                 slav1_valid=0;
                 slav2_valid=0;
                 slav3_valid=0;
+         
             end
+    end
+    
+    always@(posedge clk or reset)
+    begin
+    if (~reset)
+        begin
+        split=0;
+        split_master_id=0;
+        end
+    else
+        begin
+        split <= slav3_split;
+        if (slav3_split==1)
+            begin
+                split_master_id <= slav3_master_id;
+            end
+        else
+            split_master_id <= 0;
+        end
     end
 endmodule
