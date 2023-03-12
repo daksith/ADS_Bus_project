@@ -82,7 +82,7 @@ module Arbiter(
     always@(*)
     begin
         //handle master1
-        if (mast1_valid==1 & !(split | split_master_id==master1))
+        if (mast1_valid==1 & !(split & split_master_id==master1))
             begin
                 //connect slave1
                 if (mast1_addr[14:12] == slave1)
@@ -154,7 +154,7 @@ module Arbiter(
                     end                          
                        
             end
-            else if (mast2_valid==1 & !(split | split_master_id==master2))
+            else if (mast2_valid==1 & !(split & split_master_id==master2))
                 begin
                 //connect slave1
                 if (mast2_addr[14:12] == slave1)
@@ -225,7 +225,7 @@ module Arbiter(
                         mast2_ready = 0;
                     end   
                 end
-            else if (mast3_valid==1 & !(split | split_master_id==master3))
+            else if (mast3_valid==1 & !(split & split_master_id==master3))
                     begin
                     //connect slave1
                     if (mast3_addr[14:12] == slave1)
