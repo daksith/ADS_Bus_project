@@ -152,8 +152,9 @@ module Arbiter(
                         slav3_wdata = 0;
                         mast1_rdata = 0;
                         mast1_ready = 0;
-                    end                          
-                       
+                    end
+                mast2_ready=0;
+                mast3_ready=0;                                      
             end
             else if (mast2_valid==1 & !(split & split_master_id==master2))
                 begin
@@ -224,8 +225,10 @@ module Arbiter(
                         slav3_wdata = 0;
                         mast2_rdata = 0;
                         mast2_ready = 0;
-                    end   
-                end
+                    end  
+                mast1_ready=0;
+                mast3_ready=0;               
+                end         
             else if (mast3_valid==1 & !(split & split_master_id==master3))
                     begin
                     //connect slave1
@@ -295,7 +298,9 @@ module Arbiter(
                             slav3_wdata = 0;
                             mast3_rdata = 0;
                             mast3_ready = 0;
-                        end                  
+                        end
+                mast1_ready=0;
+                mast2_ready=0;                  
                 end      
             else
             //prevent latching of slave valid signals and master ready signals
@@ -309,7 +314,7 @@ module Arbiter(
             end
     end
     
-    always@(posedge clk or reset)
+    always@(posedge clk)
     begin
     if (~reset)
         begin
