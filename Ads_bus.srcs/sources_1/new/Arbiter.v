@@ -77,7 +77,6 @@ module Arbiter(
     `include "aribiter_params.vh"
     
     reg split;
-    reg sample_mast_id = 1;
     reg [1:0] split_master_id;
     
     always@(*)
@@ -325,16 +324,10 @@ module Arbiter(
         begin
         split <= slav3_split;
         if (slav3_split==1)
-            if (sample_mast_id==1)
-                begin
+            if (!split)
                 split_master_id <= slav3_master_id;
-                sample_mast_id <= 0;
-                end
         else   
-            begin
                 split_master_id <= 0;
-                sample_mast_id <= 1;
-            end
         end
     end
 endmodule
