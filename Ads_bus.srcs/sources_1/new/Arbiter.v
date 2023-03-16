@@ -423,7 +423,7 @@ module Arbiter(
     
     always@(posedge clk)
     begin
-    if (~reset)
+    if (reset)
         begin
         split=0;
         split_master_id=0;
