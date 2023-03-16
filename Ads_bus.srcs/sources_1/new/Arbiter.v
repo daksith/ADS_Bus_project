@@ -51,7 +51,7 @@ module Arbiter(
     output reg slav1_valid, slav1_type,
     output reg[1:0] slav1_master_id,
     output reg[31:0] slav1_wdata,
-    output reg[31:0] slav1_addr,
+    output reg[11:0] slav1_addr,
     input [31:0] slav1_rdata,
     input slav1_ready,
     
@@ -59,7 +59,7 @@ module Arbiter(
     output reg slav2_valid, slav2_type,
     output reg[1:0] slav2_master_id,
     output reg[31:0] slav2_wdata,
-    output reg[31:0] slav2_addr,
+    output reg[11:0] slav2_addr,
     input [31:0] slav2_rdata,
     input slav2_ready,
     
@@ -67,7 +67,7 @@ module Arbiter(
     output reg slav3_valid, slav3_type,
     output reg[1:0] slav3_master_id,
     output reg[31:0] slav3_wdata,
-    output reg[31:0] slav3_addr,
+    output reg[11:0] slav3_addr,
     input [31:0] slav3_rdata,
     input slav3_ready,
     input slav3_split
@@ -393,7 +393,6 @@ module Arbiter(
                 mast2_rdata=0;                  
                 end      
             else
-            //prevent
             begin
                 slav1_valid = 0;
                 slav1_addr = 0;
