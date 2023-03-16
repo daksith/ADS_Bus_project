@@ -414,10 +414,10 @@ module Arbiter(
                 slav3_wdata = 0;
                 
                 mast1_ready=0;
-                mast2_ready=0;
-                mast3_ready=0;
                 mast1_rdata=0;
+                mast2_ready=0;
                 mast2_rdata=0;
+                mast3_ready=0;
                 mast3_rdata=0;
             end
     end
