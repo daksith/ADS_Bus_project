@@ -41,7 +41,7 @@ module slave_for_testbench(
     
     always@(*)
     begin
-        if (slav_valid==1 & slav_type==write & slav_ready)
+        if (slav_valid==1 & slav_type==read & slav_ready)
             slav_rdata = data[slav_addr];
         else
             slav_rdata = 0;  

@@ -1,0 +1,11 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../Ads_bus.srcs/sources_1/new" \
+"../../../../Ads_bus.srcs/sources_1/new/Arbiter.v" \
+"../../../../Ads_bus.srcs/sim_1/new/slave_for_testbench.v" \
+"../../../../Ads_bus.srcs/sim_1/new/Arbiter_testbench.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

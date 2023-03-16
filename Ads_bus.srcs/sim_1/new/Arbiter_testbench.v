@@ -29,13 +29,14 @@ module Arbiter_testbench();
     end
     //io
     reg reset=1;
+    reg split=0;
     
     //master1
     reg mast1_valid,mast1_type=0;
     reg[1:0] mast1_id=master1;
     reg[14:0] mast1_addr=0;
     reg[31:0] mast1_wdata=0;
-    wire mast1_rdata;
+    wire[31:0] mast1_rdata;
     wire mast1_ready;
     
     //master2
@@ -43,7 +44,7 @@ module Arbiter_testbench();
     reg[1:0] mast2_id=master2;
     reg[14:0] mast2_addr=0;
     reg[31:0] mast2_wdata=0;
-    wire mast2_rdata;
+    wire[31:0] mast2_rdata;
     wire mast2_ready;
     
     //master3
@@ -51,7 +52,7 @@ module Arbiter_testbench();
     reg[1:0] mast3_id=master3;
     reg[14:0] mast3_addr=0;
     reg[31:0] mast3_wdata=0;
-    wire mast3_rdata;
+    wire[31:0] mast3_rdata;
     wire mast3_ready;
     
     //slave ready signals
@@ -87,6 +88,31 @@ module Arbiter_testbench();
     //connect arbiter
     Arbiter a(.clk(clk),.mast1_valid(mast1_valid),.mast1_type(mast1_type),.mast1_id(mast1_id),.mast1_addr(mast1_addr),.mast1_wdata(mast1_wdata),.mast1_rdata(mast1_radata),.mast1_ready(mast1_ready),
                         .mast2_valid(mast2_valid),.mast2_type(mast2_type),.mast2_id(mast2_id),.mast2_addr(mast2_addr),.mast2_wdata(mast2_wdata),.mast2_rdata(mast2_radata),.mast2_ready(mast2_ready),
-                        .mast2_valid(mast3_valid),.mast3_type(mast3_type),.mast3_id(mast3_id),.mast3_addr(mast3_addr),.mast3_wdata(mast3_wdata),.mast3_rdata(mast3_radata),.mast3_ready(mast3_ready)                  
+                        .mast3_valid(mast3_valid),.mast3_type(mast3_type),.mast3_id(mast3_id),.mast3_addr(mast3_addr),.mast3_wdata(mast3_wdata),.mast3_rdata(mast3_radata),.mast3_ready(mast3_ready),
+                        .slav1_valid(slav1_valid),.slav1_type(slav1_type),.slav1_master_id(slav1_master_id),.slav1_wdata(slav1_wdata),.slav1_rdata(slav1_rdata),.slav1_addr(slav1_addr),.slav1_ready(slav1_ready),
+                        .slav2_valid(slav2_valid),.slav2_type(slav2_type),.slav2_master_id(slav2_master_id),.slav2_wdata(slav2_wdata),.slav2_rdata(slav2_rdata),.slav2_addr(slav2_addr),.slav2_ready(slav2_ready),
+                        .slav3_valid(slav3_valid),.slav3_type(slav3_type),.slav3_master_id(slav3_master_id),.slav3_wdata(slav3_wdata),.slav3_rdata(slav3_rdata),.slav3_addr(slav3_addr),.slav3_ready(slav3_ready),.slav3_split(split),
+                        .reset(reset)            
     );
+    
+    initial
+    begin
+       @(posedge clk);
+       reset=1;
+       @(posedge clk);
+       reset=0;
+       @(posedge clk);
+       mast1_valid=1;
+       mast1_type=write;
+       mast1_addr={slave1,12'd5};
+       mast1_wdata=32'd568;
+       slav1_ready=1;
+       
+       mast2_valid=1;
+       mast2_type=write;
+       mast2_addr={slave1,12'd6};
+       mast2_wdata=32'd700;
+       slav1_ready=1;     
+    end   
+    
 endmodule
