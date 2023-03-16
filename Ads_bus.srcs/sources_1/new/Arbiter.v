@@ -84,9 +84,9 @@ module Arbiter(
         //handle master1
         if (mast1_valid==1 & !(split & split_master_id==master1))
             begin
-                //connect slave1
                 if (mast1_addr[14:12] == slave1)
                     begin
+                        //connect slave1
                         slav1_valid = 1;
                         slav1_addr = mast1_addr[11:0];
                         slav1_type = mast1_type;
@@ -94,21 +94,23 @@ module Arbiter(
                         slav1_wdata = mast1_wdata;
                         mast1_rdata = slav1_rdata;
                         mast1_ready = slav1_ready;
+                        
+                        //disconnect other slaves
+                        slav2_valid = 0;
+                        slav2_addr = 0;
+                        slav2_type = 0;
+                        slav2_master_id = 0;
+                        slav2_wdata = 0;
+                        
+                        slav3_valid = 0;
+                        slav3_addr = 0;
+                        slav3_type = 0;
+                        slav3_master_id = 0;
+                        slav3_wdata = 0;
+                        
                     end
-                else
-                //default case to prevent latching
-                    begin
-                        slav1_valid = 0;
-                        slav1_addr = 0;
-                        slav1_type = 0;
-                        slav1_master_id = 0;
-                        slav1_wdata = 0;
-                        mast1_rdata = 0;
-                        mast1_ready = 0;
-                    end
-                    
                 //connect slave2
-                if (mast1_addr[14:12] == slave2)
+                else if (mast1_addr[14:12] == slave2)
                     begin
                         slav2_valid = 1;
                         slav2_addr = mast1_addr[11:0];
@@ -117,21 +119,22 @@ module Arbiter(
                         slav2_wdata = mast1_wdata;
                         mast1_rdata = slav2_rdata;
                         mast1_ready = slav2_ready;
-                    end
-                else
-                //default case to prevent latching
-                    begin
-                        slav2_valid = 0;
-                        slav2_addr = 0;
-                        slav2_type = 0;
-                        slav2_master_id = 0;
-                        slav2_wdata = 0;
-                        mast1_rdata = 0;
-                        mast1_ready = 0;
-                    end
-                    
+                        
+                        //disconnect other slaves
+                        slav1_valid = 0;
+                        slav1_addr = 0;
+                        slav1_type = 0;
+                        slav1_master_id = 0;
+                        slav1_wdata = 0;
+                        
+                        slav3_valid = 0;
+                        slav3_addr = 0;
+                        slav3_type = 0;
+                        slav3_master_id = 0;
+                        slav3_wdata = 0;
+                    end    
                 //connect slave3
-                if (mast1_addr[14:12] == slave3)
+                else if (mast1_addr[14:12] == slave3)
                     begin
                         slav3_valid = 1;
                         slav3_addr = mast1_addr[11:0];
@@ -140,20 +143,48 @@ module Arbiter(
                         slav3_wdata = mast1_wdata;
                         mast1_rdata = slav3_rdata;
                         mast1_ready = slav3_ready;
+                        
+                        //disconnect other slaves
+                        slav1_valid = 0;
+                        slav1_addr = 0;
+                        slav1_type = 0;
+                        slav1_master_id = 0;
+                        slav1_wdata = 0;
+                        
+                        slav2_valid = 0;
+                        slav2_addr = 0;
+                        slav2_type = 0;
+                        slav2_master_id = 0;
+                        slav2_wdata = 0;
                     end
-                else
-                //default case to prevent latching
-                    begin
+                    else
+                        begin
+                        //disconnect slaves
+                        slav1_valid = 0;
+                        slav1_addr = 0;
+                        slav1_type = 0;
+                        slav1_master_id = 0;
+                        slav1_wdata = 0;
+                        
+                        slav2_valid = 0;
+                        slav2_addr = 0;
+                        slav2_type = 0;
+                        slav2_master_id = 0;
+                        slav2_wdata = 0;
+                        
                         slav3_valid = 0;
                         slav3_addr = 0;
                         slav3_type = 0;
                         slav3_master_id = 0;
                         slav3_wdata = 0;
-                        mast1_rdata = 0;
+                        
                         mast1_ready = 0;
-                    end
+                        mast1_rdata=0;
+                        end
                 mast2_ready=0;
-                mast3_ready=0;                                      
+                mast2_rdata=0;
+                mast3_ready=0;
+                mast3_rdata=0;                                      
             end
             else if (mast2_valid==1 & !(split & split_master_id==master2))
                 begin
@@ -167,21 +198,22 @@ module Arbiter(
                         slav1_wdata = mast2_wdata;
                         mast2_rdata = slav1_rdata;
                         mast2_ready = slav1_ready;
-                    end
-                else
-                //default case to prevent latching
-                    begin
-                        slav1_valid = 0;
-                        slav1_addr = 0;
-                        slav1_type = 0;
-                        slav1_master_id = 0;
-                        slav1_wdata = 0;
-                        mast2_rdata = 0;
-                        mast2_ready = 0;
-                    end
-                    
+                        
+                        //disconnect other slaves
+                        slav2_valid = 0;
+                        slav2_addr = 0;
+                        slav2_type = 0;
+                        slav2_master_id = 0;
+                        slav2_wdata = 0;
+                        
+                        slav3_valid = 0;
+                        slav3_addr = 0;
+                        slav3_type = 0;
+                        slav3_master_id = 0;
+                        slav3_wdata = 0;
+                    end 
                 //connect slave2
-                if (mast2_addr[14:12] == slave2)
+                else if (mast2_addr[14:12] == slave2)
                     begin
                         slav2_valid = 1;
                         slav2_addr = mast2_addr[11:0];
@@ -190,21 +222,22 @@ module Arbiter(
                         slav2_wdata = mast2_wdata;
                         mast2_rdata = slav2_rdata;
                         mast2_ready = slav2_ready;
-                    end
-                else
-                //default case to prevent latching
-                    begin
-                        slav2_valid = 0;
-                        slav2_addr = 0;
-                        slav2_type = 0;
-                        slav2_master_id = 0;
-                        slav2_wdata = 0;
-                        mast2_rdata = 0;
-                        mast2_ready = 0;
-                    end
-                    
+                        
+                        //disconnect other slaves
+                        slav1_valid = 0;
+                        slav1_addr = 0;
+                        slav1_type = 0;
+                        slav1_master_id = 0;
+                        slav1_wdata = 0;
+                        
+                        slav3_valid = 0;
+                        slav3_addr = 0;
+                        slav3_type = 0;
+                        slav3_master_id = 0;
+                        slav3_wdata = 0;
+                    end    
                 //connect slave3
-                if (mast2_addr[14:12] == slave3)
+                else if (mast2_addr[14:12] == slave3)
                     begin
                         slav3_valid = 1;
                         slav3_addr = mast2_addr[11:0];
@@ -213,20 +246,48 @@ module Arbiter(
                         slav3_wdata = mast2_wdata;
                         mast2_rdata = slav3_rdata;
                         mast2_ready = slav3_ready;
+                        
+                        //disconnect other slaves
+                        slav1_valid = 0;
+                        slav1_addr = 0;
+                        slav1_type = 0;
+                        slav1_master_id = 0;
+                        slav1_wdata = 0;
+                        
+                        slav2_valid = 0;
+                        slav2_addr = 0;
+                        slav2_type = 0;
+                        slav2_master_id = 0;
+                        slav2_wdata = 0;
                     end
-                else
-                //default case to prevent latching
-                    begin
+                    else
+                        begin
+                        //disconnect slaves
+                        slav1_valid = 0;
+                        slav1_addr = 0;
+                        slav1_type = 0;
+                        slav1_master_id = 0;
+                        slav1_wdata = 0;
+                        
+                        slav2_valid = 0;
+                        slav2_addr = 0;
+                        slav2_type = 0;
+                        slav2_master_id = 0;
+                        slav2_wdata = 0;
+                        
                         slav3_valid = 0;
                         slav3_addr = 0;
                         slav3_type = 0;
                         slav3_master_id = 0;
                         slav3_wdata = 0;
-                        mast2_rdata = 0;
+                        
                         mast2_ready = 0;
-                    end  
+                        mast2_rdata=0;
+                        end
                 mast1_ready=0;
-                mast3_ready=0;               
+                mast1_rdata=0;
+                mast3_ready=0;
+                mast3_rdata=0;               
                 end         
             else if (mast3_valid==1 & !(split & split_master_id==master3))
                     begin
@@ -240,21 +301,22 @@ module Arbiter(
                             slav1_wdata = mast3_wdata;
                             mast3_rdata = slav1_rdata;
                             mast3_ready = slav1_ready;
+                            
+                            //disconnect other slaves
+                            slav2_valid = 0;
+                            slav2_addr = 0;
+                            slav2_type = 0;
+                            slav2_master_id = 0;
+                            slav2_wdata = 0;
+                            
+                            slav3_valid = 0;
+                            slav3_addr = 0;
+                            slav3_type = 0;
+                            slav3_master_id = 0;
+                            slav3_wdata = 0;
                         end
-                    else
-                    //default case to prevent latching
-                        begin
-                            slav1_valid = 0;
-                            slav1_addr = 0;
-                            slav1_type = 0;
-                            slav1_master_id = 0;
-                            slav1_wdata = 0;
-                            mast3_rdata = 0;
-                            mast3_ready = 0;
-                        end
-                        
                     //connect slave2
-                    if (mast3_addr[14:12] == slave2)
+                    else if (mast3_addr[14:12] == slave2)
                         begin
                             slav2_valid = 1;
                             slav2_addr = mast3_addr[11:0];
@@ -263,21 +325,22 @@ module Arbiter(
                             slav2_wdata = mast3_wdata;
                             mast3_rdata = slav2_rdata;
                             mast3_ready = slav2_ready;
+                            
+                            //disconnect other slaves
+                            slav1_valid = 0;
+                            slav1_addr = 0;
+                            slav1_type = 0;
+                            slav1_master_id = 0;
+                            slav1_wdata = 0;
+                            
+                            slav3_valid = 0;
+                            slav3_addr = 0;
+                            slav3_type = 0;
+                            slav3_master_id = 0;
+                            slav3_wdata = 0;
                         end
-                    else
-                    //default case to prevent latching
-                        begin
-                            slav2_valid = 0;
-                            slav2_addr = 0;
-                            slav2_type = 0;
-                            slav2_master_id = 0;
-                            slav2_wdata = 0;
-                            mast3_rdata = 0;
-                            mast3_ready = 0;
-                        end
-                        
                     //connect slave3
-                    if (mast3_addr[14:12] == slave3)
+                    else if (mast3_addr[14:12] == slave3)
                         begin
                             slav3_valid = 1;
                             slav3_addr = mast3_addr[11:0];
@@ -286,30 +349,76 @@ module Arbiter(
                             slav3_wdata = mast3_wdata;
                             mast3_rdata = slav3_rdata;
                             mast3_ready = slav3_ready;
+                            
+                            //disconnect other slaves
+                            slav1_valid = 0;
+                            slav1_addr = 0;
+                            slav1_type = 0;
+                            slav1_master_id = 0;
+                            slav1_wdata = 0;
+                            
+                            slav2_valid = 0;
+                            slav2_addr = 0;
+                            slav2_type = 0;
+                            slav2_master_id = 0;
+                            slav2_wdata = 0;
                         end
-                    else
-                    //default case to prevent latching
+                        else
                         begin
-                            slav3_valid = 0;
-                            slav3_addr = 0;
-                            slav3_type = 0;
-                            slav3_master_id = 0;
-                            slav3_wdata = 0;
-                            mast3_rdata = 0;
-                            mast3_ready = 0;
-                        end
+                        //disconnect slaves
+                        slav1_valid = 0;
+                        slav1_addr = 0;
+                        slav1_type = 0;
+                        slav1_master_id = 0;
+                        slav1_wdata = 0;
+                        
+                        slav2_valid = 0;
+                        slav2_addr = 0;
+                        slav2_type = 0;
+                        slav2_master_id = 0;
+                        slav2_wdata = 0;
+                        
+                        slav3_valid = 0;
+                        slav3_addr = 0;
+                        slav3_type = 0;
+                        slav3_master_id = 0;
+                        slav3_wdata = 0;
+                        
+                        mast3_ready = 0;
+                        mast3_rdata=0;
+                        end                   
                 mast1_ready=0;
-                mast2_ready=0;                  
+                mast1_rdata=0;
+                mast2_ready=0;
+                mast2_rdata=0;                  
                 end      
             else
-            //prevent latching of slave valid signals and master ready signals
+            //prevent
             begin
-                slav1_valid=0;
-                slav2_valid=0;
-                slav3_valid=0;
+                slav1_valid = 0;
+                slav1_addr = 0;
+                slav1_type = 0;
+                slav1_master_id = 0;
+                slav1_wdata = 0;
+                
+                slav2_valid = 0;
+                slav2_addr = 0;
+                slav2_type = 0;
+                slav2_master_id = 0;
+                slav2_wdata = 0;
+                
+                slav3_valid = 0;
+                slav3_addr = 0;
+                slav3_type = 0;
+                slav3_master_id = 0;
+                slav3_wdata = 0;
+                
                 mast1_ready=0;
                 mast2_ready=0;
                 mast3_ready=0;
+                mast1_rdata=0;
+                mast2_rdata=0;
+                mast3_rdata=0;
             end
     end
     
