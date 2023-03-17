@@ -86,9 +86,9 @@ module Arbiter_testbench();
     slave_for_testbench s3(.clk(clk),.slav_valid(slav3_valid),.slav_type(slav3_type),.slav_master_id(slav3_master_id),.slav_wdata(slav3_wdata),.slav_addr(slav3_addr),.slav_ready(slav3_ready),.slav_rdata(slav3_rdata));
     
     //connect arbiter
-    Arbiter a(.clk(clk),.mast1_valid(mast1_valid),.mast1_type(mast1_type),.mast1_id(mast1_id),.mast1_addr(mast1_addr),.mast1_wdata(mast1_wdata),.mast1_rdata(mast1_radata),.mast1_ready(mast1_ready),
-                        .mast2_valid(mast2_valid),.mast2_type(mast2_type),.mast2_id(mast2_id),.mast2_addr(mast2_addr),.mast2_wdata(mast2_wdata),.mast2_rdata(mast2_radata),.mast2_ready(mast2_ready),
-                        .mast3_valid(mast3_valid),.mast3_type(mast3_type),.mast3_id(mast3_id),.mast3_addr(mast3_addr),.mast3_wdata(mast3_wdata),.mast3_rdata(mast3_radata),.mast3_ready(mast3_ready),
+    Arbiter a(.clk(clk),.mast1_valid(mast1_valid),.mast1_type(mast1_type),.mast1_id(mast1_id),.mast1_addr(mast1_addr),.mast1_wdata(mast1_wdata),.mast1_rdata(mast1_rdata),.mast1_ready(mast1_ready),
+                        .mast2_valid(mast2_valid),.mast2_type(mast2_type),.mast2_id(mast2_id),.mast2_addr(mast2_addr),.mast2_wdata(mast2_wdata),.mast2_rdata(mast2_rdata),.mast2_ready(mast2_ready),
+                        .mast3_valid(mast3_valid),.mast3_type(mast3_type),.mast3_id(mast3_id),.mast3_addr(mast3_addr),.mast3_wdata(mast3_wdata),.mast3_rdata(mast3_rdata),.mast3_ready(mast3_ready),
                         .slav1_valid(slav1_valid),.slav1_type(slav1_type),.slav1_master_id(slav1_master_id),.slav1_wdata(slav1_wdata),.slav1_rdata(slav1_rdata),.slav1_addr(slav1_addr),.slav1_ready(slav1_ready),
                         .slav2_valid(slav2_valid),.slav2_type(slav2_type),.slav2_master_id(slav2_master_id),.slav2_wdata(slav2_wdata),.slav2_rdata(slav2_rdata),.slav2_addr(slav2_addr),.slav2_ready(slav2_ready),
                         .slav3_valid(slav3_valid),.slav3_type(slav3_type),.slav3_master_id(slav3_master_id),.slav3_wdata(slav3_wdata),.slav3_rdata(slav3_rdata),.slav3_addr(slav3_addr),.slav3_ready(slav3_ready),.slav3_split(split),
@@ -106,13 +106,21 @@ module Arbiter_testbench();
        mast1_type=write;
        mast1_addr={slave1,12'd5};
        mast1_wdata=32'd568;
-       slav1_ready=1;
+       slav1_ready=0;
+       split=1;
        
        mast2_valid=1;
        mast2_type=write;
        mast2_addr={slave1,12'd6};
        mast2_wdata=32'd700;
-       slav1_ready=1;     
+       slav1_ready=1;
+       
+       @(posedge clk);
+       @(posedge clk);
+       split=0;
+       
+       
+       
     end   
     
 endmodule

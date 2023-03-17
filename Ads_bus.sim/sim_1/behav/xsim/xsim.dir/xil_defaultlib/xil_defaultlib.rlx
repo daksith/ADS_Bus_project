@@ -3,7 +3,7 @@
 Oct 14 2022
 05:20:55
 C:/Users/Daksith/Documents/Ads_bus/Ads_bus.sim/sim_1/behav/xsim/glbl.v,1665704903,verilog,,,,glbl,,,,,,,,
-C:/Users/Daksith/Documents/Ads_bus/Ads_bus.srcs/sim_1/new/Arbiter_testbench.v,1678985978,verilog,,,C:/Users/Daksith/Documents/Ads_bus/Ads_bus.srcs/sources_1/new/aribiter_params.vh,Arbiter_testbench,,,../../../../Ads_bus.srcs/sources_1/new,,,,,
+C:/Users/Daksith/Documents/Ads_bus/Ads_bus.srcs/sim_1/new/Arbiter_testbench.v,1679065024,verilog,,,C:/Users/Daksith/Documents/Ads_bus/Ads_bus.srcs/sources_1/new/aribiter_params.vh,Arbiter_testbench,,,../../../../Ads_bus.srcs/sources_1/new,,,,,
 C:/Users/Daksith/Documents/Ads_bus/Ads_bus.srcs/sim_1/new/slave_for_testbench.v,1678986287,verilog,,C:/Users/Daksith/Documents/Ads_bus/Ads_bus.srcs/sim_1/new/Arbiter_testbench.v,C:/Users/Daksith/Documents/Ads_bus/Ads_bus.srcs/sources_1/new/aribiter_params.vh,slave_for_testbench,,,../../../../Ads_bus.srcs/sources_1/new,,,,,
 C:/Users/Daksith/Documents/Ads_bus/Ads_bus.srcs/sources_1/new/Arbiter.v,1678971781,verilog,,C:/Users/Daksith/Documents/Ads_bus/Ads_bus.srcs/sim_1/new/slave_for_testbench.v,C:/Users/Daksith/Documents/Ads_bus/Ads_bus.srcs/sources_1/new/aribiter_params.vh,Arbiter,,,../../../../Ads_bus.srcs/sources_1/new,,,,,
 C:/Users/Daksith/Documents/Ads_bus/Ads_bus.srcs/sources_1/new/aribiter_params.vh,1678629554,verilog,,,,,,,,,,,,
